@@ -66,9 +66,16 @@
     })
 
     async function onsubmit(event) {
-        event.preventDefault()
+        event.preventDefault();
+        loading.value = true;
 
-        console.log(formData)
+        try{
+            await signUpHelper(formData, type.value)
+        } finally{
+            loading.value = false;
+        }
+
+        
     }
 
 definePageMeta({
