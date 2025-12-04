@@ -56,8 +56,8 @@
     const type = ref('sing-up');
     const loading = ref(false);
     const formData = reactive({
-        email:'francis@gmail.com',
-        password:'testing123'
+        email:'',
+        password:''
     })
 
     const schema = yup.object({
