@@ -24,13 +24,23 @@ export const signUpHelper = async(formData,type)=>{
         await navigateTo('/')
         return true;
     } catch(error){
+        if(error.statusCode === 400 && error.data?.data){
+            const validationErrors = error.data.data.errorsArray;
+            validationErrors.forEach(err=>{
+                 toast.add({
+                    title:'Oops',
+                    description: err,
+                    color:'error'
+                })
+            })
+        } else {
+            toast.add({
+                title:'Oops',
+                description: error.data?.statusMessage || 'Sorry, something happened',
+                color:'error'
+            })
+        }
 
-
-        toast.add({
-            title:'Oops',
-            description: error.data?.statusMessage || 'Sorry, something happened',
-            color:'error'
-        })
         return false;
     }   
 }
